@@ -23,6 +23,8 @@ public enum Message {
     ERR_DUEL_NOT_INVITED("{0} didnt invite you!"),
     ERR_PLAYER_LEFT("A player left the match..."),
 
+    ERR_PUZZLE("/puzzle [list|join]"),
+
     PLAYER_JOIN("{0} joined the Server!"),
     PLAYER_LEAVE("{0} left the Server!");
 
