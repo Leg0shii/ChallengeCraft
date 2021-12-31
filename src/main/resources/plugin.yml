@@ -1,0 +1,9 @@
+name: ChallengeCraft
+version: '${project.version}'
+main: de.legoshi.challengecraft.Main
+api-version: 1.17
+
+commands:
+  test:
+  duel:
+  level:
