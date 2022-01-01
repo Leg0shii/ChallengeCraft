@@ -2,6 +2,7 @@ package de.legoshi.challengecraft.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 
 public class BlocksCopy {
 
@@ -41,8 +42,8 @@ public class BlocksCopy {
                     int yNew = (int) ((y - yDown) + destP[1]);
                     int zNew = (int) ((z - zDown) + destP[2]);
 
-                    Material material = Bukkit.getServer().getWorld(World.STANDARD.world).getBlockAt(x, y, z).getType();
-                    Bukkit.getServer().getWorld(World.STANDARD.world).getBlockAt(xNew, yNew, zNew).setType(material);
+                    Block block = Bukkit.getServer().getWorld(World.STANDARD.world).getBlockAt(x, y, z);
+                    Bukkit.getServer().getWorld(World.STANDARD.world).setBlockData(xNew, yNew, zNew, block.getBlockData());
                 }
             }
         }

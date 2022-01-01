@@ -1,7 +1,9 @@
 package de.legoshi.challengecraft.listener;
 
+import de.legoshi.challengecraft.level.LevelManager;
 import de.legoshi.challengecraft.player.PlayerManager;
 import de.legoshi.challengecraft.player.PlayerObject;
+import de.legoshi.challengecraft.utils.BlocksCopy;
 import de.legoshi.challengecraft.utils.Message;
 import de.legoshi.challengecraft.utils.Prefix;
 import org.bukkit.Material;
@@ -14,9 +16,11 @@ import org.bukkit.inventory.ItemStack;
 public class ItemListener implements Listener {
 
     private PlayerManager playerManager;
+    private LevelManager levelManager;
 
-    public ItemListener(PlayerManager playerManager) {
+    public ItemListener(PlayerManager playerManager, LevelManager levelManager) {
         this.playerManager = playerManager;
+        this.levelManager = levelManager;
     }
 
     @EventHandler
@@ -30,8 +34,8 @@ public class ItemListener implements Listener {
                     playerObject.getPlayer().sendMessage(Message.ERR_DUEL.msg(Prefix.GOOD));
                 } else if(event.getItem().getType().equals(Material.RED_DYE)) {
                     playerObject.getPlayer().getInventory().clear();
-                    playerObject.setCompleted(true);
-                    playerObject.setInEBMap(false);
+                    levelManager.loadLevel(playerObject.getLevel().getName(), playerObject.getPlayer());
+                    event.getPlayer().sendMessage("Reset...");
                 } else if(event.getItem().getType().equals(Material.BLACK_DYE)) {
                     playerObject.setInEBMap(false);
                     playerObject.setInDuel(false);
@@ -39,7 +43,9 @@ public class ItemListener implements Listener {
             }
         } else if(event.getAction() == Action.PHYSICAL) {
             if(event.getClickedBlock().getType().equals(Material.HEAVY_WEIGHTED_PRESSURE_PLATE)) {
-
+                PlayerObject playerObject = playerManager.getPlayerMap().get(event.getPlayer());
+                playerObject.setCompleted(true);
+                playerObject.setInEBMap(false);
             }
         }
 
