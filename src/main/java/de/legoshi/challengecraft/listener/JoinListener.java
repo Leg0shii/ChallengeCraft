@@ -1,5 +1,6 @@
 package de.legoshi.challengecraft.listener;
 
+import de.legoshi.challengecraft.Main;
 import de.legoshi.challengecraft.player.PlayerManager;
 import de.legoshi.challengecraft.player.PlayerObject;
 import de.legoshi.challengecraft.utils.Message;
@@ -21,6 +22,8 @@ public class JoinListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
+        player.teleport(Main.getInstance().spawn);
+
         event.setJoinMessage(Message.PLAYER_JOIN.msg(Prefix.GOOD, player.getName()));
         event.getPlayer().sendMessage("§cWrite /duel invite <player> to invite a player to your duel!");
         event.getPlayer().sendMessage("§cWrite /duel accept <player> to accept a duel!");
