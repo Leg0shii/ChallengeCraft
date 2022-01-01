@@ -1,6 +1,6 @@
 package de.legoshi.challengecraft.commands;
 
-import de.legoshi.challengecraft.escapebr.EscapeBedrock;
+import de.legoshi.challengecraft.escapebr.EscapeBedrockDuel;
 import de.legoshi.challengecraft.level.LevelManager;
 import de.legoshi.challengecraft.player.PlayerManager;
 import de.legoshi.challengecraft.player.PlayerObject;
@@ -33,11 +33,14 @@ public class DuelCommand implements CommandExecutor {
             return false;
         }
 
+        if(args[1].equals(sender.getName())) {
+            sender.sendMessage(Message.ERR_DUEL_CANT_INV_YOURSELF.msg(Prefix.BAD));
+            return false;
+        }
+
         Player invited = null;
 
         for(Player all : Bukkit.getOnlinePlayers()) {
-            System.out.println(all.getName());
-            System.out.println(args[1]);
             if(all.getName().equals(args[1])) {
                 invited = Bukkit.getPlayer(args[1]);
             }
@@ -57,15 +60,12 @@ public class DuelCommand implements CommandExecutor {
             if(args[1].equals(playerObject.getDuelPlayer().getPlayer().getName())) {
                 if(playerObject.getDuelPlayer() != null) {
                     sender.sendMessage(Message.SUCC_DUEL_ACCEPT.msg(Prefix.GOOD, sender.getName()));
-                    EscapeBedrock escapeBedrock = new EscapeBedrock(playerManager, levelManager);
-                    escapeBedrock.startGame(playerObject, playerObject.getDuelPlayer());
+                    // starts new game
+                    new EscapeBedrockDuel(playerObject, playerObject.getDuelPlayer(),levelManager).run();
                 }
-            } else {
-                sender.sendMessage(Message.ERR_DUEL_NOT_INVITED.msg(Prefix.GOOD, args[1]));
-            }
+            } else sender.sendMessage(Message.ERR_DUEL_NOT_INVITED.msg(Prefix.GOOD, args[1]));
             return true;
         }
-
         sender.sendMessage(Message.ERR_DUEL.msg(Prefix.BAD));
         return false;
     }

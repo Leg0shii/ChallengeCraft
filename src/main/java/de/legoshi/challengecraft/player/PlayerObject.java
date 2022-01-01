@@ -6,17 +6,27 @@ import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-@Getter @Setter
+@Getter
+@Setter
 public class PlayerObject {
 
     private Player player;
     private PlayerObject duelPlayer;
-    private Location duelSpawn;
-    private int runnableID;
+    private Level level;
+
+    private boolean inDuel;
+    private boolean inEBMap;
+    private boolean completed;
 
     public PlayerObject(Player player) {
+        this.inDuel = false;
+        this.inEBMap = false;
+        this.completed = false;
         this.player = player;
-        this.runnableID = -1;
+    }
+
+    public boolean isSpawn() {
+        return !inEBMap && !inDuel;
     }
 
 }

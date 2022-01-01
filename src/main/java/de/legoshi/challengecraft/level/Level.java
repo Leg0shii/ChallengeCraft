@@ -1,8 +1,12 @@
 package de.legoshi.challengecraft.level;
 
 import de.legoshi.challengecraft.utils.FW;
+import de.legoshi.challengecraft.utils.World;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 
 @Getter @Setter
 public class Level {
@@ -34,6 +38,11 @@ public class Level {
         this.spawnX = Double.parseDouble(fw.getString(name+".spawnX"));
         this.spawnY = Double.parseDouble(fw.getString(name+".spawnY"));
         this.spawnZ = Double.parseDouble(fw.getString(name+".spawnZ"));
+    }
+
+    public Location getSpawn() {
+        Location location = new Location(Bukkit.getWorld(World.STANDARD.world), spawnX, spawnY, spawnZ);
+        return location;
     }
 
 }

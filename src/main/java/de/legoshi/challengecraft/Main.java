@@ -2,8 +2,10 @@ package de.legoshi.challengecraft;
 
 import de.legoshi.challengecraft.commands.DuelCommand;
 import de.legoshi.challengecraft.commands.LevelCommand;
+import de.legoshi.challengecraft.commands.PuzzleCommand;
 import de.legoshi.challengecraft.commands.TestCommand;
 import de.legoshi.challengecraft.level.LevelManager;
+import de.legoshi.challengecraft.listener.ItemListener;
 import de.legoshi.challengecraft.listener.JoinListener;
 import de.legoshi.challengecraft.listener.PlayerChatListener;
 import de.legoshi.challengecraft.listener.QuitListener;
@@ -50,6 +52,7 @@ public final class Main extends JavaPlugin {
         getCommand("test").setExecutor(new TestCommand());
         getCommand("duel").setExecutor(new DuelCommand(playerManager, levelManager));
         getCommand("level").setExecutor(new LevelCommand());
+        getCommand("puzzle").setExecutor(new PuzzleCommand(playerManager, levelManager));
     }
 
     private void listenerRegistration() {
@@ -57,6 +60,7 @@ public final class Main extends JavaPlugin {
         pm.registerEvents(new JoinListener(playerManager), this);
         pm.registerEvents(new QuitListener(playerManager), this);
         pm.registerEvents(new PlayerChatListener(), this);
+        pm.registerEvents(new ItemListener(playerManager), this);
     }
 
     public static Main getInstance() {

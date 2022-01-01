@@ -19,10 +19,12 @@ public enum Message {
     SUCC_DUEL_INVITE("Successfully invited {0}."),
     SUCC_DUEL_INVITE_OTHER("You got an invite from {0} for a bedrock tower duel!"),
     SUCC_DUEL_ACCEPT("Successfully accepted invite from {0}."),
-    ERR_DUEL("/duel [invite|accept] <player>"),
     ERR_DUEL_NOT_INVITED("{0} didnt invite you!"),
     ERR_PLAYER_LEFT("A player left the match..."),
+    ERR_DUEL("/duel [invite|accept] <player>"),
+    ERR_DUEL_CANT_INV_YOURSELF("Get some friends..."),
 
+    INFO_PUZZLE_LIST("Here are all available levels:"),
     ERR_PUZZLE("/puzzle [list|join]"),
 
     PLAYER_JOIN("{0} joined the Server!"),
